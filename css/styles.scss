@@ -1,16 +1,7 @@
-$blue: #cbe3ff;
-$grey: #707070;
-$light-grey: #ccc;
-$black: #181818;
-$black-black: #111;
-$lightblue: #b8dbf4;
-$blue-white: #e6f2ff;
-$off-white: #f9ffff;
-$white: #fff;
-$menu-background:rgba(203, 227, 255, .9);
-$wmpc-background: rgba(254, 207, 1, 1);
-$amethyst-background: rgba(137, 0, 196, 1);
-$paul-background: rgba(148, 22, 81, 1);
+$void: #0e0b16;
+$fuschia: #cc39ca;
+$purple: #4717f6;
+$grey: #e7dfdd;
 $head-height: 110px;
 $foot-height: 70px;
 $collapse: 1000px;
@@ -79,24 +70,29 @@ $menu-transition: .5s;
 
 html {
   font-size: 62.5%; // set font size to 10px ready for easy coversions to rem
+  min-height: 100vh;
 }
 
 body { // font, font size, alignment, margin and colour
-  color: $grey;
-  font-family: 'Raleway', sans-serif;
+  @include flex-display;
+  @include flex-dir-column;
+  background-color: $grey;
+  color: $void;
+  font-family: 'Sarabun', sans-serif;
   font-size: 1.6rem;
+  height: 100vh;
   margin: 0;
   text-align: center;
 }
 
 a { // colour and transition
-  color: $grey;
+  color: $purple;
   -webkit-transition: color $menu-transition ease;
   transition: color $menu-transition ease; // transition for colour change on hover
 }
 
 a:hover {
-  color: $black;
+  color: $void;
 }
 
 // ----HEADER----
@@ -110,7 +106,15 @@ header { // flexbox, font size, height, position, z-index (s)
   position: relative;
   z-index: 1;
 
+  .logo {
+    font-family: 'Exo', sans-serif;
+    font-weight: bold;
+    font-size: 4rem;
+  }
+
   a { // text-decoration
+    color: $fuschia;
+    font-weight: 300;
     text-decoration: none;
     width: 100%;
   }
@@ -120,10 +124,10 @@ header { // flexbox, font size, height, position, z-index (s)
     @include flex-display;
     @include flex-dir-row;
     @include flex-justify-space-between;
-    background-color: $blue;
+    background-color: $void;
     // shadow below header
-    -webkit-box-shadow: 0 3px 15px $grey;
-    box-shadow: 0 3px 15px $grey;
+    -webkit-box-shadow: 0 3px 15px $void;
+    box-shadow: 0 3px 15px $void;
     font-size: 1.75rem;
     font-weight: 800;
     height: .7 * $head-height;
@@ -135,10 +139,10 @@ header { // flexbox, font size, height, position, z-index (s)
   header { // colour, shadow, flexbox, height (s)
     @include flex-dir-row;
     @include flex-justify-space-between;
-    background-color: $blue;
+    background-color: $void;
     // shadow below header
-    -webkit-box-shadow: 0 3px 15px $grey;
-    box-shadow: 0 3px 15px $grey;
+    -webkit-box-shadow: 0 3px 15px $void;
+    box-shadow: 0 3px 15px $void;
     height: $head-height;
 
     .head { // remove shadow, alter width
@@ -157,7 +161,7 @@ header { // flexbox, font size, height, position, z-index (s)
   svg { // rect, text (s)
     rect { // style rectangle around contact me
       fill: none;
-      stroke: $grey;
+      stroke: $fuschia;
       stroke-dasharray: 500,0;
       stroke-dashoffset: 0;
       stroke-width: 2;
@@ -166,7 +170,7 @@ header { // flexbox, font size, height, position, z-index (s)
 		}
 
     text { // style text in rectangle
-      fill: $grey;
+      fill: $fuschia;
       -webkit-transition: all 1.35s cubic-bezier(.5, 1, .22, 1);
       transition: all 1.35s cubic-bezier(.5, 1, .22, 1);
 		}
@@ -184,18 +188,18 @@ header { // flexbox, font size, height, position, z-index (s)
 .nav-link:hover,
 .nav-link:focus,
 .nav-link:active { // style the nav links on hover
-  color: $black;
+  color: $grey;
 
   svg { // contact me on hover
     rect {
-      stroke: $black;
+      stroke: $grey;
       stroke-dasharray: 26,474;
       stroke-dashoffset: 168;
       stroke-width: 6;
 		}
 
     text {
-      fill: $black;
+      fill: $grey;
 		}
 	}
 }
@@ -207,7 +211,7 @@ header { // flexbox, font size, height, position, z-index (s)
 
   #burger { // styling lines in hamburger, transitions
     line {
-      stroke: $grey;
+      stroke: $fuschia;
       stroke-linecap: round;
       stroke-width: 3px;
 		}
@@ -245,7 +249,7 @@ header { // flexbox, font size, height, position, z-index (s)
 .my-btn:active { // turn hamburger black and bold on hover
   #burger {
     line {
-      stroke: $black;
+      stroke: $grey;
       stroke-width: 4px;
       -webkit-transition: stroke $menu-transition ease, stroke-width $menu-transition ease;
       transition: stroke $menu-transition ease, stroke-width $menu-transition ease;
@@ -261,7 +265,7 @@ header { // flexbox, font size, height, position, z-index (s)
   @include flex-align-center;
   @include flex-display;
   @include flex-dir-column;
-  background-color: $menu-background;
+  background-color: $void;
   width: 100%;
   position: absolute;
   top: .7 * $head-height;
@@ -289,12 +293,10 @@ header { // flexbox, font size, height, position, z-index (s)
   @include flex-display;
   @include flex-dir-column;
   @include flex-justify-center;
-  background: url('../images/wireframe.jpg') no-repeat center center; // page background
-  background-size: cover;
-  color: $lightblue;
+  color: $void;
   min-height: 250px;
   padding: 0 10px;
-  text-shadow: 2px 2px 7px $black-black;
+  // text-shadow: 2px 2px 7px $black-black;
   width: 100%;
 }
 
@@ -341,25 +343,6 @@ h1 { // font size
   h2 { // font size, margin
     font-size: 2rem;
     margin-top: 0;
-  }
-
-  .process { // flexbox, backgrouns, padding, width (s)
-    @include flex-align-center;
-    @include flex-display;
-    @include flex-dir-column;
-    @include flex-justify-center;
-    background-color: $blue-white;
-    padding: 10px 20px;
-    width: 100%;
-
-    h3 { // font size, margin
-      font-size: 4rem;
-      margin: 10px 0;
-    }
-
-    p { // font size
-      font-size: 2.5rem;
-    }
   }
 }
 
@@ -430,12 +413,11 @@ h1 { // font size
       @include flex-dir-column;
       @include flex-justify-center;
       list-style-type: none;
-      -webkit-box-shadow: 0 0 5px $black-black;
-      box-shadow: 0 0 5px $black-black;
+      // -webkit-box-shadow: 0 0 5px $black-black;
+      // box-shadow: 0 0 5px $black-black;
       border-radius: 10px;
       margin: 10px;
       min-height: 150px;
-      background-color: $blue-white;
       width: 100%;
       padding: 0 5px;
     }
@@ -463,324 +445,14 @@ h1 { // font size
   }
 }
 
-// ----PORTFOlIO----
-
-.portfolio { // background colour
-  background-color: $blue;
-}
-
-.portfolio-cards { // flexbox, padding
-  @include flex-align-center;
-  @include flex-display;
-  @include flex-dir-column;
-  @include flex-justify-space-around;
-  padding: 20px;
-
-  &.one {
-    padding-bottom: 10px;
-
-    .portfolio-img {
-      margin-bottom: 5px;
-    }
-  }
-
-  &.two {
-    padding-top: 10px;
-
-    .portfolio-img {
-      margin-top: 5px;
-    }
-  }
-}
-
-.portfolio-img { // flex order, margin, position (s)
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  margin: 15px;
-  position: relative;
-
-  .site-img { // flexbox (s)
-    @include flex-align-center;
-    @include flex-display;
-    @include flex-justify-center;
-
-    img { // border-radius, position, width
-      border-radius: 5px;
-      position: relative;
-      width: 100%;
-    }
-
-    .wmpc { // background
-      background: $wmpc-background;
-    }
-
-    .amethyst { // background
-      background: $amethyst-background;
-    }
-
-    .paul { // background
-      background: $paul-background;
-    }
-  }
-
-  .site-img:hover { // fade in text on hover
-    .hvr-txt {
-      opacity: 1;
-      -webkit-transition: opacity $menu-transition ease-in-out;
-      transition: opacity $menu-transition ease-in-out;
-    }
-  }
-}
-
-.hvr-txt { // flex-box, border-radius, colour, cursor, font size, weight, height, position, opacity, text shadow, transitions, width (s)
-  @include flex-align-center;
-  @include flex-display;
-  @include flex-dir-column;
-  @include flex-justify-center;
-  border-radius: 5px;
-  color: $white;
-  cursor: pointer;
-  font-size: 2rem;
-  font-weight: bold;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  opacity: 0;
-  padding: 5px;
-  position: absolute;
-  text-shadow: 1px 1px 5px $black-black;
-  top: 0;
-  -webkit-transition: opacity $menu-transition ease-in-out;
-  transition: opacity $menu-transition ease-in-out;
-
-  &.wmpc {
-    color: $black;
-    text-shadow: none;
-  }
-
-  h2 {
-    margin: 15px 0;
-    text-transform: uppercase;
-  }
-
-  p {
-    font-size: 1.5rem;
-  }
-}
-
-@media (min-width:$collapse-foot) {
-  .hvr-txt {
-    font-size: 3rem;
-
-    p {
-      font-size: 2.5rem;
-    }
-  }
-}
-
-@media (min-width:$collapse) { // cards in a row
-  .portfolio-cards {
-    @include flex-dir-row;
-  }
-}
-
-// ----PORTFOlIO DETAIL PAGES----
-
-.portfolio-about { // flexbox, background colour, font-size
-  @include flex-align-center;
-  @include flex-display;
-  @include flex-dir-column;
-  background-color: $blue-white;
-  font-size: 1.6rem;
-}
-
-.portfolio-text { // flexbox, padding
-  @include flex-align-center;
-  @include flex-display;
-  @include flex-dir-column;
-  padding: 15px;
-  -webkit-box-flex: 3;
-  -ms-flex: 3;
-  flex: 3;
-}
-
-.portfolio-visit { // flexbox, margin, cursor, position (s)
-  @include flex-align-center;
-  @include flex-display;
-  @include flex-dir-column;
-  margin: 30px;
-  cursor: pointer;
-  position: relative;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-
-  .site-img { // flexbox (s)
-    @include flex-align-center;
-    @include flex-display;
-    @include flex-justify-center;
-
-    img { // position, backface-visibility, width, opacity, transform, transition
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-      opacity: 1;
-      position: relative;
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-      -webkit-transition: -webkit-transform $menu-transition ease-in-out,
-                          transform $menu-transition ease-in-out,
-                          opacity $menu-transition ease-in-out;
-      transition: -webkit-transform $menu-transition ease-in-out,
-                  transform $menu-transition ease-in-out,
-                  opacity $menu-transition ease-in-out;
-      width: 100%;
-    }
-
-    .wmpc { // background, border-radius
-      background: $wmpc-background;
-      border-radius: 50%;
-    }
-
-    .amethyst { // background, border-radius
-      background: $amethyst-background;
-      border-radius: 10px;
-    }
-
-    .paul { // background, border-radius
-      background: $paul-background;
-      border-radius: 10px;
-    }
-  }
-
-  .site-img:hover { // spin and fade in text on hover
-    color: $white;
-
-    img { // opacity, transform
-      opacity: 0;
-      -webkit-transform: rotateY(180deg);
-      transform: rotateY(180deg);
-    }
-
-    .hvr-spin { // opacity, transform
-      opacity: 1;
-      -webkit-transform: rotateY(0deg);
-      transform: rotateY(0deg);
-    }
-  }
-
-  .hvr-spin { // flexbox, border-radius, colour, cursor, height, position, backface-vilibility, transform, opacity, transitions, width (s)
-    @include flex-align-center;
-    @include flex-display;
-    @include flex-justify-center;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    opacity: 0;
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-    position: absolute;
-    -webkit-transition: -webkit-transform $menu-transition ease-in-out,
-                        transform $menu-transition ease-in-out,
-                        opacity $menu-transition ease-in-out;
-    transition: -webkit-transform $menu-transition ease-in-out,
-                transform $menu-transition ease-in-out,
-                opacity $menu-transition ease-in-out;
-    width: 100%;
-
-    h3 { // colour, font size and weight, text-shadow
-      color: $white;
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow: 1px 1px 10px $black-black;
-    }
-  }
-}
-
-@media (min-width:600px) { // para font size
-  .portfolio-about {
-    font-size: 2rem;
-	}
-}
-
-@media (min-width:$collapse) {
-  .portfolio-about {
-    @include flex-dir-row;
-  }
-}
-
-// ----CONTACT----
-
-.contact-me {
-  background-color: $blue-white;
-}
-
-.contact-info {
-  @include flex-align-center;
-  @include flex-display;
-  @include flex-dir-column;
-}
-
-.text {
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  font-size: 2rem;
-  padding: 0 20px;
-}
-
-form {
-  @include flex-align-center;
-  @include flex-display;
-  @include flex-dir-column;
-  font-size: 2.4rem;
-  -webkit-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  padding: 10px 0;
-
-  label {
-    margin: 5px;
-
-    input {
-      color: $grey;
-      font-family: 'Raleway', sans-serif;
-      font-size: 2rem;
-    }
-
-    textarea {
-      border: 1px solid $light-grey;
-      color: $grey;
-      font-family: 'Raleway', sans-serif;
-      font-size: 2rem;
-    }
-  }
-
-  &:first-child {
-    margin-top: 2.5px;
-  }
-
-  .message {
-    @include flex-align-center;
-    @include flex-display;
-    @include flex-dir-column;
-    margin-top: 2.5px;
-  }
-}
-
-@media (min-width:$collapse) {
-  .contact-info {
-    @include flex-dir-row
-  }
-}
-
 // ----FOOTER----
 
 footer { // flexbox and background colour (s)
   @include flex-align-center;
   @include flex-display;
   @include flex-dir-column;
-  background-color: $blue;
+  background-color: $void;
+  color: $fuschia;
   padding-bottom: 10px;
 
   img { // font size & margin
@@ -802,8 +474,18 @@ footer { // flexbox and background colour (s)
   footer { // change to row
     @include flex-dir-row;
     height: auto;
+    margin-top: auto;
     max-height: 100px;
-    padding: 0;
+    padding: 10px 0;
+
+    a {
+      color: $fuschia;
+
+      &:hover,
+      &:focus {
+        color: $grey;
+      }
+    }
 
     .footer-logo {
       width: 35%;
