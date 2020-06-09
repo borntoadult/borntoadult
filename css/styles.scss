@@ -1,7 +1,7 @@
 $void: #0e0b16;
-$fuschia: #cc39ca;
-$purple: #4717f6;
+$purple: #94478E;
 $grey: #e7dfdd;
+$divider: #cbc0be;
 $head-height: 110px;
 $foot-height: 70px;
 $collapse: 1000px;
@@ -18,6 +18,12 @@ $menu-transition: .5s;
   -webkit-box-align: stretch;
   -ms-flex-align: stretch;
   align-items: stretch;
+}
+
+@mixin flex-align-start {
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
 }
 
 @mixin flex-display {
@@ -80,19 +86,20 @@ body { // font, font size, alignment, margin and colour
   color: $void;
   font-family: 'Sarabun', sans-serif;
   font-size: 1.6rem;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
   text-align: center;
 }
 
 a { // colour and transition
   color: $purple;
+  text-decoration: none;
   -webkit-transition: color $menu-transition ease;
   transition: color $menu-transition ease; // transition for colour change on hover
 }
 
 a:hover {
-  color: $void;
+
 }
 
 // ----HEADER----
@@ -109,11 +116,11 @@ header { // flexbox, font size, height, position, z-index (s)
   .logo {
     font-family: 'Exo', sans-serif;
     font-weight: bold;
-    font-size: 4rem;
+    font-size: 2.5rem;
   }
 
   a { // text-decoration
-    color: $fuschia;
+    color: $grey;
     font-weight: 300;
     text-decoration: none;
     width: 100%;
@@ -153,28 +160,46 @@ header { // flexbox, font size, height, position, z-index (s)
   }
 }
 
+@media (min-width:600px) { // min-height (title), font size
+  header {
+    .logo {
+      font-size: 3.5rem;
+    }
+  }
+}
+
+@media (min-width:740px) { // font size
+  header {
+    .logo {
+      font-size: 4.5rem;
+    }
+  }
+}
+
+@media (min-width:1000px) { // font size
+  header {
+    .logo {
+      font-size: 5.5rem;
+    }
+  }
+}
+
 // ----NAVBAR----
 
 .nav-link { // padding (s)
   padding: 15px 15px 10px;
 
-  svg { // rect, text (s)
-    rect { // style rectangle around contact me
-      fill: none;
-      stroke: $fuschia;
-      stroke-dasharray: 500,0;
-      stroke-dashoffset: 0;
-      stroke-width: 2;
-      -webkit-transition: all 1.35s cubic-bezier(.5, 1, .22, 1);
-      transition: all 1.35s cubic-bezier(.5, 1, .22, 1);
-		}
+  div {
+    display: inline-block;
 
-    text { // style text in rectangle
-      fill: $fuschia;
-      -webkit-transition: all 1.35s cubic-bezier(.5, 1, .22, 1);
-      transition: all 1.35s cubic-bezier(.5, 1, .22, 1);
-		}
-	}
+    &:after {
+      display: block;
+      content: '';
+      border-bottom: solid 3px $grey;
+      transform: scaleX(0);
+      transition: transform $menu-transition ease-in-out;
+    }
+  }
 
   &:not(:last-child) { // aligns links vertically with each other
     padding-bottom: 21px;
@@ -188,20 +213,11 @@ header { // flexbox, font size, height, position, z-index (s)
 .nav-link:hover,
 .nav-link:focus,
 .nav-link:active { // style the nav links on hover
-  color: $grey;
-
-  svg { // contact me on hover
-    rect {
-      stroke: $grey;
-      stroke-dasharray: 26,474;
-      stroke-dashoffset: 168;
-      stroke-width: 6;
-		}
-
-    text {
-      fill: $grey;
-		}
-	}
+  div {
+    &:after {
+       transform: scaleX(1);
+    }
+  }
 }
 
 .my-btn { // burger - background, border, margin
@@ -211,7 +227,7 @@ header { // flexbox, font size, height, position, z-index (s)
 
   #burger { // styling lines in hamburger, transitions
     line {
-      stroke: $fuschia;
+      stroke: $grey;
       stroke-linecap: round;
       stroke-width: 3px;
 		}
@@ -284,6 +300,10 @@ header { // flexbox, font size, height, position, z-index (s)
     width: 50%;
     opacity: 100% !important;
   }
+
+  .nav-link:not(:last-child) {
+    padding-bottom: 10px;
+  }
 }
 
 // ----HEADINGS----
@@ -294,7 +314,7 @@ header { // flexbox, font size, height, position, z-index (s)
   @include flex-dir-column;
   @include flex-justify-center;
   color: $void;
-  min-height: 250px;
+  min-height: 75px;
   padding: 0 10px;
   // text-shadow: 2px 2px 7px $black-black;
   width: 100%;
@@ -306,7 +326,7 @@ h1 { // font size
 
 @media (min-width:600px) { // min-height (title), font size
   .title {
-    min-height: 400px;
+    min-height: 100px;
   }
 
   h1 {
@@ -326,122 +346,108 @@ h1 { // font size
   }
 }
 
-// ----HOMEPAGE----
-
-.homepage { // flexbox, position, z-index (s)
+main { // flexbox, position, z-index (s)
   @include flex-align-center;
   @include flex-display;
   @include flex-dir-column;
   position: relative;
   z-index: 0;
-
-  h1 { // font size, margin
-    font-size: 4rem;
-    margin-bottom: 0;
-  }
-
-  h2 { // font size, margin
-    font-size: 2rem;
-    margin-top: 0;
-  }
 }
 
-// font size adjustments for larger screens
-
-@media (min-width:600px) {
-  .homepage {
-    h1 {
-      font-size: 5rem;
-		}
-
-    h2 {
-      font-size: 3rem;
-		}
-	}
+.content {
+  @include flex-align-start;
+  @include flex-display;
+  @include flex-dir-row;
+  width: 100%;
 }
 
-@media (min-width:740px) {
-  .homepage {
-    h1 {
-      font-size: 6rem;
-		}
+// ----POSTS----
 
-    h2 {
-      font-size: 4rem;
-		}
-	}
-}
-
-@media (min-width:1000px) {
-  .homepage {
-    h1 {
-      font-size: 7rem;
-		}
-
-    h2 {
-      font-size: 5rem;
-		}
-	}
-}
-
-// ----ABOUT----
-
-.about { // flexbox (s)
+.postList {
   @include flex-align-center;
   @include flex-display;
   @include flex-dir-column;
-  @include flex-justify-center;
+  margin: 30px;
+  width: 70%;
+}
 
-  .about-text {
-    font-size: 2rem;
+.post {
+  @include flex-align-center;
+  @include flex-display;
+  @include flex-dir-column;
 
-    p {
-      padding: 0 10px;
+  .postHeader {
+    &:after {
+      border-bottom: 1px solid $divider;
+      content: "";
+      display: block;
+      margin: 0 auto 40px;
+      width: 35%;
+    }
+
+    .date {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .postTitle {
+      font-size: 2.5rem;
+      text-transform: uppercase;
     }
   }
 
-  ul {
-    @include flex-align-center;
-    @include flex-display;
-    @include flex-dir-column;
-    @include flex-justify-center;
-    padding: 10px;
-
-    li {
-      @include flex-align-center;
-      @include flex-display;
-      @include flex-dir-column;
-      @include flex-justify-center;
-      list-style-type: none;
-      // -webkit-box-shadow: 0 0 5px $black-black;
-      // box-shadow: 0 0 5px $black-black;
-      border-radius: 10px;
-      margin: 10px;
-      min-height: 150px;
-      width: 100%;
-      padding: 0 5px;
+  .picture {
+    img {
+      width: 60%;
     }
+  }
+
+  .snippet {
+    font-size: 1.8rem;
+    margin: 20px 0;
+  }
+
+  &:after {
+    border-bottom: 1px solid $divider;
+    content: "";
+    display: block;
+    margin: 0 auto 40px;
+    width: 100%;
   }
 }
 
-@media (min-width:740px) { // changes on larger screens
-  .about {
-    .about-text {
-      font-size: 2.5rem;
-    }
+.postPage {
+  .post {
+    border: none;
+    margin: 30px;
+    width: 70%;
+  }
 
-    ul {
-      @include flex-dir-row;
-      @include flex-justify-space-around;
+  .postContent {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
 
-      li {
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        width: auto;
-        min-height: 220px;
-      }
-    }
+  .snippet {
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+}
+
+// ----ASIDE----
+
+aside {
+  border-left: 1px solid $divider;
+  padding-left: 20px;
+  margin-top: 70px;
+  width: 20%;
+
+  h2 {
+    border-bottom: 1px solid $divider;
+    font-size: 1.8rem;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    width: auto;
   }
 }
 
@@ -452,7 +458,7 @@ footer { // flexbox and background colour (s)
   @include flex-display;
   @include flex-dir-column;
   background-color: $void;
-  color: $fuschia;
+  color: $grey;
   padding-bottom: 10px;
 
   img { // font size & margin
@@ -479,7 +485,7 @@ footer { // flexbox and background colour (s)
     padding: 10px 0;
 
     a {
-      color: $fuschia;
+      color: $grey;
 
       &:hover,
       &:focus {
